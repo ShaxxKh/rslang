@@ -1,15 +1,15 @@
-.sign-up__container {
-  margin-top: 130px;
+.auth__container {
+  height: calc(100vh - 200px);
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.sign-up__content {
-  max-width: 570px;
+.auth__content {
+  max-width: 600px;
 }
 
-.sign-up__content h2 {
+.auth__content h2 {
   font-size: 5.6rem;
   font-weight: 900;
   line-height: 1.3;
