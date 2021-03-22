@@ -22,7 +22,7 @@ const SignIn = () => (
         </form>
         <p className="form__subheading">
           Нет аккаунта?
-          <Link to="/sign-up"> Регистрация</Link>
+          <Link to="/sign-up" className="form__link"> Регистрация</Link>
         </p>
       </div>
     </div>
