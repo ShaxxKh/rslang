@@ -4,11 +4,11 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-} from "react-router-dom";
-import Main from "./pages/Main";
-import MainLayout from "./components/MainLayout";
-import SignUp from "./pages/AuthPage/SignUp/SignUp";
-import MainContext from "./context";
+} from 'react-router-dom';
+import Main from './pages/Main';
+import MainLayout from './components/MainLayout';
+import SignUp from './pages/AuthPage/SignUp/SignUp';
+import MainContext from './context';
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
           <MainLayout>
             <Switch>
               <Route path="/" component={Main} exact />
-              <Route path="/sign-up" component={SignUp} exact />
+              <Route path="/sign-up" component={SignUp} />
             </Switch>
           </MainLayout>
         </MainContext>

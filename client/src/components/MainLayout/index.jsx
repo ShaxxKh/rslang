@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 import PropTypes from 'prop-types';
-import AuthHeader from "../Header/AuthHeader/AuthHeader";
+import AuthHeader from '../Header/AuthHeader/AuthHeader';
 
 export default function MainLayout({ children }) {
   return (
