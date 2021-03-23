@@ -8,7 +8,6 @@ const SignIn = () => {
 
   const submitSignIn = React.useCallback(async (e) => {
     e.preventDefault();
-
   });
 
   return (

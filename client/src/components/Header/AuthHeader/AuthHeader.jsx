@@ -11,6 +11,8 @@ const AuthHeader = () => {
   React.useEffect(() => {
     if (location.includes('sign-up')) {
       setIsSignUp(true);
+    } else {
+      setIsSignUp(false)
     }
   }, [isSignUp, location]);
 
