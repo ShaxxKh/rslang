@@ -4,7 +4,7 @@ import AuthHeader from '../Header/AuthHeader/AuthHeader';
 import MainHeader from '../Header/MainHeader/MainHeader';
 
 export default function MainLayout({ children }) {
-  const [token, setToken] = useState('asd');
+  const [token, setToken] = useState('');
   return (
     <>
       <header>
