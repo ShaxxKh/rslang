@@ -1,5 +1,10 @@
+/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from 'react-router-dom';
 import Main from './pages/Main';
 import MainLayout from './components/MainLayout';
 import SignUp from './pages/AuthPage/SignUp/SignUp';
