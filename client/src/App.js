@@ -10,6 +10,7 @@ import MainLayout from './components/MainLayout';
 import SignUp from './pages/AuthPage/SignUp/SignUp';
 import SignIn from './pages/AuthPage/SignIn/SignIn';
 import MainContext from './context';
+import Textbook from './components/TextBook/Textbook';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
               <Route path="/" component={Main} exact />
               <Route path="/sign-up" component={SignUp} />
               <Route path="/sign-in" component={SignIn} />
+              <Route path="/textbook/:id" component={Textbook} />
             </Switch>
           </MainLayout>
         </MainContext>
