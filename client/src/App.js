@@ -7,6 +7,8 @@ import {
 } from 'react-router-dom';
 import Main from './pages/Main';
 import MainLayout from './components/MainLayout';
+import SignUp from './pages/AuthPage/SignUp/SignUp';
+import SignIn from './pages/AuthPage/SignIn/SignIn';
 import MainContext from './context';
 
 function App() {
@@ -17,6 +19,8 @@ function App() {
           <MainLayout>
             <Switch>
               <Route path="/" component={Main} exact />
+              <Route path="/sign-up" component={SignUp} />
+              <Route path="/sign-in" component={SignIn} />
             </Switch>
           </MainLayout>
         </MainContext>
