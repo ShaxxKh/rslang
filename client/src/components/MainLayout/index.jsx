@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import AuthHeader from '../Header/AuthHeader/AuthHeader';
+import MainHeader from '../Header/MainHeader/MainHeader';
 
 export default function MainLayout({ children }) {
+  const [token, setToken] = useState('asd');
   return (
     <>
       <header>
-        <AuthHeader />
+        { token ? <MainHeader /> : <AuthHeader /> }
       </header>
-      <div className="body">
+      <main className="body">
         {children}
-      </div>
+      </main>
       <footer>
         Footer
       </footer>
