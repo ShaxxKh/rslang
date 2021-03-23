@@ -1,12 +1,10 @@
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from "react-router-dom";
-import Main from "./pages/Main";
-import MainLayout from "./components/MainLayout";
-import MainContext from "./context";
-import TextBook from "./components/TextBook/Textbook"
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Main from './pages/Main';
+import MainLayout from './components/MainLayout';
+import SignUp from './pages/AuthPage/SignUp/SignUp';
+import SignIn from './pages/AuthPage/SignIn/SignIn';
+import MainContext from './context';
 
 function App() {
   return (
@@ -16,7 +14,8 @@ function App() {
           <MainLayout>
             <Switch>
               <Route path="/" component={Main} exact />
-              <Route path ="/textbook/:id" exact component={TextBook} />
+              <Route path="/sign-up" component={SignUp} />
+              <Route path="/sign-in" component={SignIn} />
             </Switch>
           </MainLayout>
         </MainContext>
