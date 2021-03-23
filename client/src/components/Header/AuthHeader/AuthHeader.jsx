@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './AuthHeader.scss';
 
-import Logo from '../../../assets/imgs/Header/logo.png';
+import Logo from '../../../assets/img/logo.png';
 
 const AuthHeader = () => {
   const location = useLocation().pathname;
@@ -11,8 +11,6 @@ const AuthHeader = () => {
   React.useEffect(() => {
     if (location.includes('sign-up')) {
       setIsSignUp(true);
-    } else {
-      setIsSignUp(false);
     }
   }, [isSignUp, location]);
 
