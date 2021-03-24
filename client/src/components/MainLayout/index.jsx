@@ -7,13 +7,13 @@ import Sidebar from '../Header/Sidebar/Sidebar';
 
 export default function MainLayout({ children }) {
   const location = useLocation();
-  const [token, setToken] = useState('a');
+  const [token, setToken] = useState('aasd'); // '' - you can see header when user loggined
   return (
     <>
       <header>
-        { token ? <MainHeader /> : <AuthHeader /> }
+        { !token ? <MainHeader /> : <AuthHeader /> }
       </header>
-      { token ? <Sidebar /> : <></> }
+      { !token ? <Sidebar /> : <></> }
       <main className="body">
         {children}
       </main>
