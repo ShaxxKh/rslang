@@ -5,6 +5,9 @@
     height: 86px;
     background-color: #fff;
     box-shadow: 1px 5px 14px rgb(0 0 0 / 10%);
+    .logout-icon:hover path {
+        fill: #483d8b;
+    }
 }
 
 .main-header__container {
