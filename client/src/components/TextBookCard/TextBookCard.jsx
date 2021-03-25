@@ -4,17 +4,16 @@ import { useHistory } from 'react-router-dom';
 import styles from './TextBookCard.module.scss'
 
 const TextBookCard = () => {
-    // second array index dont need us , iam now too lazy for delating it from code ))
-    const [height,setHeight] = useState([['95px','16px'],['80px','1px'],['80px','1px'],['80px','1px'],['80px','1px'],['80px','1px']])
+    const [height,setHeight] = useState([['95px'],['80px'],['80px'],['80px'],['80px'],['80px']])
     const history = useHistory()
     const changeLevel = (e) => {
         let text = e.currentTarget.textContent;
         let index = Number(text[text.length-1] - 1);
         let newHeight = [...height.map((item,i)=>{
             if(item===height[index]){
-               return item = ['95px','16px']
+               return item = ['95px']
             }else{
-               return item = ['80px','1px']
+               return item = ['80px']
             }
         })]
         setHeight(newHeight)
