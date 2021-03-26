@@ -11,9 +11,9 @@ export default function MainLayout({ children }) {
   return (
     <>
       <header>
-        { !token ? <MainHeader /> : <AuthHeader /> }
+        {!token ? <MainHeader /> : <AuthHeader />}
       </header>
-      { !token ? <Sidebar /> : <></> }
+      {!token ? <Sidebar /> : <></>}
       <main className="body">
         {children}
       </main>
