@@ -4,9 +4,8 @@ import {
   ListItem,
   ListItemText,
   ListItemIcon,
-  Switch 
 } from '@material-ui/core';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import VolumeUpIcon from '@material-ui/icons/VolumeUp';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -17,9 +16,8 @@ import { Pagination } from '@material-ui/lab';
 import { useParams, useHistory } from 'react-router-dom';
 import SettingsIcon from '@material-ui/icons/Settings';
 import styles from './Textbook.module.scss';
-import CloseIcon from '@material-ui/icons/Close';
-
-
+import Popup from '../Popup/Popup'
+import Labels from '../Labels/Lebels'
 const TextBook = () => {
   const { id } = useParams();
   const [data, setData] = useState([]);
@@ -90,56 +88,8 @@ const TextBook = () => {
   const openSetting = (e) => {
       setPopup(['popup','window'])
   }
-  const exitSetting = () => {
-    setPopup(['none','none'])
-  }
-  const removeTranslate = (e) =>{
-      if(checked[0]){
-        let newChecked =  [...checked];
-        newChecked[0] = false
-        newChecked[2] = 'block'
-        setChecked(newChecked)
-      }else{
-        let newChecked =  [...checked];
-        newChecked[0] = true
-        newChecked[2] = 'none'
-        setChecked(newChecked)
-      }
-  }
-  const removeButtons = (e) =>{
-    if(checked[1]){
-      let newChecked =  [...checked];
-      newChecked[1] = false;
-      newChecked[3] = 'block'
-      setChecked(newChecked)
-    }else{
-      let newChecked =  [...checked];
-      newChecked[1] = true
-      newChecked[3] = 'none'
-      setChecked(newChecked)
-    }
-  }
-  const [height,setHeight] = useState([['95px'],['80px'],['80px'],['80px'],['80px'],['80px']])
-  const changeLevel = (e) => {
-      let text = e.currentTarget.textContent;
-      let index = Number(text[text.length-1] - 1);
-      let newHeight = [...height.map((item,i)=>{
-          if(item===height[index]){
-             return item = ['95px']
-          }else{
-             return item = ['80px']
-          }
-      })]
-      if(id.length===3){
-        history.push(`/textbook/${index}${id[1]}${id[2]}`)
-      }
-      else{
-        history.push(`/textbook/${index}${id[1]}`)
-      }
-  
-      setHeight(newHeight)
-   
-  }
+ 
+ 
   if (isNaN(Number(id))) {
     return (
       <div>Page does not exist</div>
@@ -148,42 +98,17 @@ const TextBook = () => {
 
   return (
     <div className={styles.page}>
-      <div className = {popup[0]}>
-          <CloseIcon  className = {styles.exit} onClick = {()=>{exitSetting()}}></CloseIcon>
-          <h2 className={styles.title}>Настройка</h2>
-          <List component='div'>
-            <ListItem component='div'>
-              <ListItemText primary = 'Remove translation of words'/>
-              <ListItemIcon><Switch onChange={(e)=>removeTranslate(e)} checked={checked[0]} color='primary'/> </ListItemIcon>
-            </ListItem>
-            <ListItem component='div'>
-              <ListItemText primary = 'Remove delete and add buttons'/>
-              <ListItemIcon><Switch onChange={(e)=>removeButtons(e)} checked={checked[1]} color='primary'/> </ListItemIcon>
-            </ListItem>
-          </List>
-      </div>
-      <div className = {popup[1]}></div>
-    
-      <div className ={`${styles.container} ${styles.containerLabels}`}> {/* There are settin icon and category navigation*/ }
+      <Popup popup={popup} setPopup = {setPopup} checked = {checked} setChecked={setChecked} />
+      <div className ={`${styles.container} ${styles.containerLabels}`}> {/* There are setting icon and category navigation*/ }
         <div className = {styles.labels}>
-        { ['#5ad13e','#31dbf0','#8e39f7','#f739cb','rgb(238 57 247)','red'].map((item,index)=>(
-            <div key = {item} className = {styles.label}>
- 
-                    <div onClick={(e)=>changeLevel(e)} className={styles.text} style={{height:height[index][0],backgroundColor:item}}>
-                        {`Page ${index+1}`}
-                    </div>
-                    <div className={styles.triangle}>
-                        <div style={{borderTop: `10px solid ${item}`}} className={styles.arrowDown}></div>
-                    </div>
-                </div>
-        ))}
+       <Labels/>
         </div>
         <SettingsIcon onClick={(e)=>{openSetting(e)}} className = {`${styles.icon} ${styles.setting}`}></SettingsIcon></div>
       <div className={styles.container}>
         <List component="div" >{
         data!==[]&&data.map((elem,index)=>{return(
           <div key={elem.id}>
-          <ListItem component="div">
+          <ListItem component="div"> {/* There is  coloumn of list*/ }
             <ListItemIcon><div className={styles.image} style={{ backgroundImage: `url(https://sashan.herokuapp.com/${elem.image})` }} /></ListItemIcon>
             <ListItemIcon><VolumeUpIcon data-name={index} onClick={(e) => { playWord(e); }} className={styles.icon} /></ListItemIcon>
             <ListItemText primary={(

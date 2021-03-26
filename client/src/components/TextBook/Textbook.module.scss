@@ -66,55 +66,12 @@ html{
     margin-top: 30px;
     margin-bottom: 20px;
 }
-.exit{
-    font-size: 27px !important;
-    margin-top: 8px;
-    margin-left: calc(100% - 52px);
-    background-color: #ffbf6a;
-    border-radius: 26px;
-    height: 35px !important;
-    width: 36px !important;
-    transition: 0.3s !important;
 
-}
-.exit:hover{
-    background-color: #ffd0a6
-}
-.title{
-    text-align: center;
-}
-.label{
-    width: 20px;
-    padding: 0px;
-    padding-top: 4px;
-    margin-right: 5px;
-}
 .labels{
  display: flex;
  margin-left: 30px;
  height: 110px;
  transition: 0.3s;
-}
-.arrowDown {
-    width: 0;
-    height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-top: 10px solid red;
-}
-.triangle{
-    transition: 0.3s;
-}
-.text{
-    margin-top: -4px;
-    padding-top: 2px;
-    color: #fff;
-    text-orientation: upright;
-    writing-mode: vertical-rl;
-    word-spacing: -11px;
-    font-size: 15px;
-    cursor: pointer;
-    transition: 0.3s;
 }
 .containerLabels{
     display: flex;
