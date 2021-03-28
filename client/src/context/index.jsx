@@ -16,7 +16,7 @@ export default function MainContext({ children }) {
   }, [])
 
   //! Should be FALSE
-  const [singleWordMode, setSingleWordMode] = React.useState(true)
+  const [singleWordMode, setSingleWordMode] = React.useState(false)
 
   return (
     <Context.Provider
