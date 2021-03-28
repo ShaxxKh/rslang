@@ -16,6 +16,7 @@ html {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-color: #EDF0F6;
 }
 
 .body {
@@ -53,6 +54,10 @@ button {
     opacity: 0.8;
     transition: .2s opacity ease-in-out;
   }
+}
+
+.blue-text {
+  color: #407df4;
 }
 
 .yellow-span {
