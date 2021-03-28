@@ -15,10 +15,15 @@ export default function MainContext({ children }) {
       .catch(err => console.log(err))
   }, [])
 
+  //! Should be FALSE
+  const [singleWordMode, setSingleWordMode] = React.useState(true)
+
   return (
     <Context.Provider
       value={{
-        words
+        words,
+        singleWordMode, 
+        setSingleWordMode
       }}
     >
       {children}

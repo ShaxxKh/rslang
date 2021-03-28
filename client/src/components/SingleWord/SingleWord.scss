@@ -1,0 +1,25 @@
+.single-word {
+  &__settings {
+    display: flex;
+    justify-content: space-between;
+
+    img {
+      height: 30px;
+      cursor: pointer;
+      transition: 0.2s opacity ease-in-out;
+
+      &:hover {
+        transition: 0.2s opacity ease-in-out;
+        opacity: 0.5;
+      }
+    }
+
+    &-main {
+      display: flex;
+
+      div {
+        margin-right: 10px;
+      }
+    }
+  }
+}
