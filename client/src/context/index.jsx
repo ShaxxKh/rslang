@@ -2,10 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
+
 export const Context = React.createContext(null);
 
 export default function MainContext({ children }) {
   const [words, setWords] = React.useState([])
+	const [isAuth, setAuth] = React.useState(false)
+	
   React.useEffect(() => {
     axios({
       url: 'https://sashan.herokuapp.com/words',
@@ -18,7 +21,9 @@ export default function MainContext({ children }) {
   return (
     <Context.Provider
       value={{
-        words
+        words,
+				isAuth,
+				setAuth
       }}
     >
       {children}

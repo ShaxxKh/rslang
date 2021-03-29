@@ -1,13 +1,29 @@
 import React, { useState } from 'react';
 import { Button, TextField } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import axios from 'axios'
+import { Context } from '../../../context'
 
-const SignIn = () => {
+const SignIn = (props) => {
+	const { setAuth } = React.useContext(Context)
   const [email, setEmail] = React.useState();
   const [password, setPassword] = React.useState('');
-
+	let date = new Date(Date.now() + 86400e3);
+	date = date.toUTCString();
   const submitSignIn = React.useCallback(async (e) => {
     e.preventDefault();
+		axios({
+			method: "POST",
+			url: "https://sashan.herokuapp.com/signin",
+			data: {
+				email,
+				password: "" + password
+			}
+		}).then((response) => {
+			document.cookie = `rslangToken=${response.data.token}; expires=${date}`
+			setAuth(true)
+			props.history.push("/learning")
+		})
   });
 
   return (
@@ -27,7 +43,7 @@ const SignIn = () => {
               label="Email"
               className="form__input"
               error={true}
-              onBlur={(e) => setEmail('asdasdsad')}
+              onBlur={(e) => setEmail(e.target.value)}
             />
             <TextField
               type="password"
