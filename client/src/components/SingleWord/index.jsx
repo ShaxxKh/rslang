@@ -8,12 +8,20 @@ import close from '../../assets/icons/close.svg'
 import { Context } from '../../context'
 
 export default function SingleWord() {
-  const { words, setSingleWordMode } = React.useContext(Context)
+  const {
+    words,
+    setSingleWordMode,
+    currentValue,
+    setCurrentValue,
+    currentIndex,
+    setCurrentIndex,
+    corrects,
+    setCorrects,
+    errors,
+    setErrors,
+    learnWordsCount
+  } = React.useContext(Context)
   const [status, setStatus] = React.useState(false)
-  const [currentValue, setCurrentValue] = React.useState('')
-  const [currentIndex, setCurrentIndex] = React.useState(0)
-  const [corrects, setCorrects] = React.useState([])
-  const [errors, setErrors] = React.useState([])
   const word = words && words[currentIndex]
 
   const cardRef = React.useRef()
@@ -27,19 +35,17 @@ export default function SingleWord() {
     }
   }, [word])
 
-  console.log(word)
-
   const changeValueHandler = (e) => {
     setCurrentValue(e.target.value)
   }
 
   const submitHandler = () => {
     if (currentValue === word.word && currentValue === word.word.toLowerCase()) {
-      setCorrects(prev => [...prev, word[setCurrentIndex]])
+      setCorrects(prev => [...prev, word])
       cardRef.current.classList.add('correct')
       setStatus(true)
     } else {
-      setErrors(prev => [...prev, word[currentIndex]])
+      setErrors(prev => [...prev, word])
     }
   }
 
@@ -83,10 +89,10 @@ export default function SingleWord() {
               <div
                 className="progress-bar"
                 role="progressbar"
-                style={{ width: `${corrects.length / 0.1}%` }}
+                style={{ width: `${learnWordsCount / 0.1}%` }}
                 aria-valuemin="0"
                 aria-valuemax="10"
-                aria-valuenow={corrects.length}
+                aria-valuenow={learnWordsCount}
               >
                 {corrects.length}
               </div>

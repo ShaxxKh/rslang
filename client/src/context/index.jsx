@@ -8,22 +8,45 @@ export default function MainContext({ children }) {
   const [words, setWords] = React.useState([])
   React.useEffect(() => {
     axios({
-      url: 'https://sashan.herokuapp.com/words',
+      url: 'https://sashan.herokuapp.com/words?group=0&page=10',
       method: 'GET',
     })
       .then(res => setWords(res.data))
       .catch(err => console.log(err))
   }, [])
 
+  console.log(words)
+
   //! Should be FALSE
   const [singleWordMode, setSingleWordMode] = React.useState(false)
+  const [currentValue, setCurrentValue] = React.useState('')
+  const [currentIndex, setCurrentIndex] = React.useState(localStorage.getItem('currentIndex') || 0)
+  const [corrects, setCorrects] = React.useState(JSON.parse(localStorage.getItem('corrects')) || [])
+  const [errors, setErrors] = React.useState([])
+  const learnWordsCount = corrects.length
+
+  React.useEffect(() => {
+    localStorage.setItem('learnWordsCount', learnWordsCount)
+    localStorage.setItem('currentIndex', currentIndex)
+    localStorage.setItem('corrects', JSON.stringify(corrects))
+  }, [corrects, learnWordsCount, currentIndex])
+
 
   return (
     <Context.Provider
       value={{
         words,
         singleWordMode, 
-        setSingleWordMode
+        setSingleWordMode,
+        currentIndex,
+        setCurrentIndex,
+        corrects,
+        setCorrects,
+        currentValue,
+        setCurrentValue,
+        errors,
+        setErrors,
+        learnWordsCount
       }}
     >
       {children}

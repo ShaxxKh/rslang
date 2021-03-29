@@ -1,5 +1,4 @@
 import React from 'react'
-import { Context } from '../../context'
 import Card from '../Card'
 import MainCard from '../MainCard'
 import './Learning.scss'
@@ -28,7 +27,7 @@ const cards = [
 export default function LearningMain() {
   return (
     <>
-     <div className="container-fluid">
+     <div className="learning container-fluid">
       <div className="learning__greeting">
         <h1>
           <span>Привет!</span>

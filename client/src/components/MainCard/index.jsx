@@ -1,6 +1,8 @@
 import React from 'react'
+import { Context } from '../../context'
 
 export default function MainCard() {
+  const { learnWordsCount } = React.useContext(Context)
   return (
     <div className="learning__main card-container">
       <h3 className="learning__main-left">Сегодня изучено</h3>
@@ -8,7 +10,7 @@ export default function MainCard() {
         <p>
           Изучено:
             {' '}
-          <span>5</span>
+          <span>{learnWordsCount}</span>
           {' '}
             из
             {' '}
@@ -20,7 +22,10 @@ export default function MainCard() {
           <div
             className="progress-bar"
             role="progressbar"
-            style={{ width: `25%` }}
+            style={{ width: `${learnWordsCount / 0.1}%` }}
+            aria-valuemin="0"
+            aria-valuemax="10"
+            aria-valuenow={learnWordsCount}
           />
         </div>
       </div>
