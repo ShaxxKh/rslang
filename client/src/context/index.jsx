@@ -7,8 +7,8 @@ export const Context = React.createContext(null);
 
 export default function MainContext({ children }) {
   const [words, setWords] = React.useState([])
-	const [isAuth, setAuth] = React.useState(false)
-	
+	const [isAuth, setAuth] = React.useState(localStorage.getItem('isAuth') || false)
+  console.log(isAuth)
   React.useEffect(() => {
     axios({
       url: 'https://sashan.herokuapp.com/words',
@@ -17,6 +17,10 @@ export default function MainContext({ children }) {
       .then(res => setWords(res.data))
       .catch(err => console.log(err))
   }, [])
+
+  React.useEffect(() => {
+    localStorage.setItem('isAuth', isAuth)
+  }, [isAuth])
 
   return (
     <Context.Provider

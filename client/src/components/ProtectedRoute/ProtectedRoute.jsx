@@ -4,10 +4,13 @@ import { Context } from '../../context'
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
 	const { isAuth, setAuth } = React.useContext(Context)
-	const token = document.cookie.replace(/(?:(?:^|.*;\s*)rslangToken\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-	if(token !== ""){
-		setAuth(true)
-	}
+	const token = document.cookie.replace(/(?:(?:^|.*;\s*)rslangToken\s*=\s*([^;]*).*$)|^.*$/, "$1");
+  console.log(token)
+	React.useEffect(() => {
+    if(token){
+      setAuth(true)
+    }
+  }, [])
   return (
     <Route
       {...rest}
