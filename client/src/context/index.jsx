@@ -45,7 +45,7 @@ export default function MainContext({ children }) {
       value={{
         words,
 				isAuth,
-				setAuth
+				setAuth,
         singleWordMode, 
         setSingleWordMode,
         currentIndex,
