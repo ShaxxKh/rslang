@@ -6,7 +6,6 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
 	const { isAuth, setAuth } = React.useContext(Context)
 	// const token = document.cookie.replace(/(?:(?:^|.*;\s*)rslangToken\s*=\s*([^;]*).*$)|^.*$/, "$1");
   // console.log(token)
-
 	const token = localStorage.getItem('rslangToken');
 
 	React.useEffect(() => {
@@ -14,16 +13,16 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
       setAuth(true)
     }
   }, [])
-	return (
+  return (
     <Route
       {...rest}
       render={props =>
-        (isAuth === "true" || isAuth === true) ? (
+        isAuth === "false" ||  isAuth === false ? (
           <Component {...props} />
         ) : (
           <Redirect
             to={{
-              pathname: '/sign-in',
+              pathname: '/learning',
               state: { from: props.location },
             }}
           />

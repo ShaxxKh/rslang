@@ -8,8 +8,8 @@ const SignIn = (props) => {
 	const { setAuth } = React.useContext(Context)
   const [email, setEmail] = React.useState();
   const [password, setPassword] = React.useState('');
-	let date = new Date(Date.now() + 86400e3);
-	date = date.toUTCString();
+	// let date = new Date(Date.now() + 86400e3);
+	// date = date.toUTCString();
   const submitSignIn = React.useCallback(async (e) => {
     e.preventDefault();
 		axios({
@@ -20,7 +20,8 @@ const SignIn = (props) => {
 				password: "" + password
 			}
 		}).then((response) => {
-			document.cookie = `rslangToken=${response.data.token}; expires=${date}`
+			localStorage.setItem("rslangToken", response.data.token)
+			// document.cookie = `rslangToken=${response.data.token}; expires=${date}`
 			setAuth(true)
 			props.history.push("/learning")
 		})
