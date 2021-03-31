@@ -62,7 +62,7 @@ const TextBook = () => {
     const index = Number(e.currentTarget.getAttribute('data-name'));
     if (display[index] === '0px') {
       const newDisplay = [...display];
-      newDisplay[index] = '250px';
+      newDisplay[index] = '260px';
       setDisplay(newDisplay);
     } else {
       const newDisplay = [...display];
