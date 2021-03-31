@@ -1,8 +1,8 @@
 .auth__container {
-    height: calc(100vh - 200px);
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 100px 20px !important;
 }
 
 .auth__content {

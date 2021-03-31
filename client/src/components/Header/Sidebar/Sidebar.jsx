@@ -68,7 +68,12 @@ const Sidebar = () => {
                     })}
                 </nav>
             </div>
-            <div className="sidebar__footer"><LogoutIcon className="logout-icon" /> <span>Выйти</span></div>
+            <div className="sidebar__footer">
+                <div className="sidebar__footer logout">
+                    <LogoutIcon className="logout-icon" />
+                    <span>Выйти</span>   
+                </div>
+            </div>
         </div>
     );
 };
