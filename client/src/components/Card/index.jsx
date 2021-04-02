@@ -2,11 +2,34 @@ import React from 'react'
 import { Context } from '../../context'
 
 export default function Card({ data, progress }) {
-  const { setSingleWordMode, learnWordsCount } = React.useContext(Context)
+  const {
+    setSingleWordMode,
+    learnWordsCount,
+    setCurrentGroup,
+    currentGroup,
+    corrects,
+    errors,
+    words,
+  } = React.useContext(Context)
 
-  const clickHandler = () => {
+  const clickHandler = (e) => {
+    switch (e.target.id) {
+      case "new":
+        setCurrentGroup(words)
+        break;
+      case "dif":
+        setCurrentGroup(errors)
+        break;
+      case "repeat":
+        setCurrentGroup(corrects)
+        break;
+      default:
+        break;
+    }
     setSingleWordMode(true)
   }
+
+  console.log(currentGroup)
   return (
     <div className="learning__bot-col">
       <div className="learning__bot-col--card card-container">
@@ -16,6 +39,7 @@ export default function Card({ data, progress }) {
           className="button"
           type="button"
           onClick={clickHandler}
+          id={data.type}
         >
           Начать!
            </button>

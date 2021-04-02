@@ -14,6 +14,7 @@ export default function MainContext({ children }) {
   const [currentIndex, setCurrentIndex] = React.useState(localStorage.getItem('currentIndex') || 0)
   const [corrects, setCorrects] = React.useState(JSON.parse(localStorage.getItem('corrects')) || [])
   const [errors, setErrors] = React.useState([])
+  const [currentGroup, setCurrentGroup] = React.useState([])
   const learnWordsCount = corrects.length
   React.useEffect(() => {
     axios({
@@ -56,7 +57,9 @@ export default function MainContext({ children }) {
         setCurrentValue,
         errors,
         setErrors,
-        learnWordsCount
+        learnWordsCount,
+        currentGroup,
+        setCurrentGroup
       }}
     >
       {children}

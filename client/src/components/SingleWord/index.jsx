@@ -16,13 +16,17 @@ export default function SingleWord() {
     currentIndex,
     setCurrentIndex,
     corrects,
-    setCorrects,
     errors,
+    setCorrects,
     setErrors,
-    learnWordsCount
+    learnWordsCount,
+    currentGroup
   } = React.useContext(Context)
   const [status, setStatus] = React.useState(false)
-  const word = words && words[currentIndex]
+  const word = currentGroup && currentGroup[currentIndex]
+
+  console.log(corrects)
+  console.log(errors)
 
   const cardRef = React.useRef()
   const meaningRef = React.useRef()
@@ -41,11 +45,15 @@ export default function SingleWord() {
 
   const submitHandler = () => {
     if (currentValue === word.word && currentValue === word.word.toLowerCase()) {
-      setCorrects(prev => [...prev, word])
-      cardRef.current.classList.add('correct')
-      setStatus(true)
-    } else {
-      setErrors(prev => [...prev, word])
+      if (!corrects.includes(word)) {
+        setCorrects(prev => [...prev, word])
+        cardRef.current.classList.add('correct')
+        setStatus(true)
+      } else {
+        if (errors.includes(word)) {
+          setErrors(prev => [...prev, word])
+        }
+      }
     }
   }
 
