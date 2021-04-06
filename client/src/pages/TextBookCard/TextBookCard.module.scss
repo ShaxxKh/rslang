@@ -3,7 +3,7 @@
     height: 350px;
     background-color: #2a2a72;
     background-image: linear-gradient(315deg, #2a2a72 0%, #009ffd 74%);
-    margin: 0 auto;
+    margin: 20px auto;
     border-radius: 21px;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
@@ -40,6 +40,7 @@
     font-size: 15px;
     cursor: pointer;
     transition: 0.3s;
+    letter-spacing: -3px;
 }
 .title{
     height: 133.33px;
@@ -52,6 +53,7 @@
 .title h2{
     color:#fff;
     font-size: 3rem;
+    margin: 0 0 0 0;
 }
 .open{
     display: flex;
@@ -65,4 +67,7 @@
     height: 38px;
     border-radius: 13px;
     cursor: pointer;
+}
+.open h3{
+    margin: 0 0 0 0;
 }

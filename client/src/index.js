@@ -1,8 +1,8 @@
-/* eslint-disable react/jsx-filename-extension */
+/* eslint-disable  */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.scss';
 import App from './App';
+import './index.scss';
 
 ReactDOM.render(
   <React.StrictMode>

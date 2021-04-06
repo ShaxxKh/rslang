@@ -1,6 +1,7 @@
 /* eslint-disable */ 
 import styles from './Popup.module.scss'
 import CloseIcon from '@material-ui/icons/Close';
+import {setSetting} from '../../pages/TextBook/responses'
 import {
     List,
     ListItem,
@@ -12,17 +13,20 @@ const Popup = ({popup,checked,setChecked,setPopup}) => {
      const exitSetting = () => {
     setPopup(['none','none'])
   }
-  const removeTranslate = (e) =>{
+
+  const removeTranslate = async (e) =>{
       if(checked[0]){
         let newChecked =  [...checked];
         newChecked[0] = false
         newChecked[2] = 'block'
         setChecked(newChecked)
+        setSetting(newChecked)
       }else{
         let newChecked =  [...checked];
         newChecked[0] = true
         newChecked[2] = 'none'
         setChecked(newChecked)
+        setSetting(newChecked)
       }
   }
   const removeButtons = (e) =>{
@@ -31,11 +35,13 @@ const Popup = ({popup,checked,setChecked,setPopup}) => {
       newChecked[1] = false;
       newChecked[3] = 'block'
       setChecked(newChecked)
+      setSetting(newChecked)
     }else{
       let newChecked =  [...checked];
       newChecked[1] = true
       newChecked[3] = 'none'
       setChecked(newChecked)
+      setSetting(newChecked)
     }
   }
     return(

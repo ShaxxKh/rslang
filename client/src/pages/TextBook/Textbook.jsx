@@ -16,14 +16,25 @@ import { Pagination } from '@material-ui/lab';
 import { useParams, useHistory } from 'react-router-dom';
 import SettingsIcon from '@material-ui/icons/Settings';
 import styles from './Textbook.module.scss';
-import Popup from '../Popup/Popup'
-import Labels from '../Labels/Lebels'
-const TextBook = () => {
+import Popup from '../../components/Popup/Popup'
+import Labels from '../../components/Labels/Lebels'
+import { Context } from '../../context/index'
+import React from 'react'
+import {getSetting,getWords,setChosedWord,delateMark,delateWord} from './responses'
+
+
+const TextBook = (props) => {
+  const {
+    words,
+  } = React.useContext(Context)
+
   const { id } = useParams();
   const [data, setData] = useState([]);
   const history = useHistory();
   const [popup,setPopup] = useState(['none','none'])
   const [checked,setChecked] = useState([false,false,'block','block'])
+  const [icon,setIcon] = useState(Array.from({ length: 20 }).map((x) => 0))
+  const [delateStyle,SetDelateStyle] = useState(Array.from({ length: 20 }).map((x) => 'block'))
   let [defaultPage, setDefaultPage] = useState(localStorage.getItem('page') || 1);
   if (localStorage.getItem('page') !== id) {
     if(id.length === 3){
@@ -37,23 +48,64 @@ const TextBook = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      let checked = await getSetting()
+      setChecked(checked)
       let result;
       if(id.length === 3){
         result = await axios(
-          `https://react-learnwords-example.herokuapp.com/words?group=${id[0]}&page=${`${id[id.length-2]}${id[id.length-1]}`-1}`,
+          `https://sashan.herokuapp.com/words?group=${id[0]}&page=${`${id[id.length-2]}${id[id.length-1]}`-1}`,
         );
       }else{
         result = await axios(
-          `https://react-learnwords-example.herokuapp.com/words?group=${id[0]}&page=${id[id.length-1]}`,
+          `https://sashan.herokuapp.com/words?group=${id[0]}&page=${id[id.length-1]}`,
         );
       }
-      console.log(result.data);
       setData(result.data)
     };
     fetchData();
     
   }, [id]);
-
+  useEffect(()=>{
+    const fetchChosedWords = async () =>{
+      if(data.length !==0){
+        let userWord = await getWords()
+        let choosedWord = userWord.filter((elem)=>elem.difficulty==='easy')
+        choosedWord=choosedWord.map((e)=>{
+          return e.optional.word
+        })
+        let newDelateStyle = Array.from({ length: 20 }).map((x) => 'block')
+        for(let i = 0;i<choosedWord.length;i++){
+          let index = data.findIndex((e)=>{
+            return e.id===choosedWord[i].id
+          })
+          if(index>-1){
+            newDelateStyle[index] = 'none'
+          }
+        }
+        SetDelateStyle(newDelateStyle)
+      }
+    }
+    fetchChosedWords()
+  },[data,id])
+  useEffect(()=>{
+    const fetchChosedWords = async () =>{
+      let userWord = await getWords()
+      let choosedWord = userWord.filter((elem)=>elem.difficulty==='hard')
+      choosedWord=choosedWord.map((e)=>{
+        return e.optional.word
+      })
+      let newData = [...data]
+      let newIcon = [...icon]
+      for(let i = 0;i<choosedWord.length;i++){
+        let index = newData.findIndex((e)=>{
+          return e.id===choosedWord[i].id
+        })
+        newIcon[index] = 1;
+      }
+     setIcon(newIcon)
+    }
+    fetchChosedWords()
+  },[data])
   const handleChangePage = (e) => {
     localStorage.setItem('page', e.target.textContent);
     history.push(`/textbook/${id[0]}${e.target.textContent}`);
@@ -62,7 +114,7 @@ const TextBook = () => {
     const index = Number(e.currentTarget.getAttribute('data-name'));
     if (display[index] === '0px') {
       const newDisplay = [...display];
-      newDisplay[index] = '260px';
+      newDisplay[index] = '370px';
       setDisplay(newDisplay);
     } else {
       const newDisplay = [...display];
@@ -88,18 +140,35 @@ const TextBook = () => {
   const openSetting = (e) => {
       setPopup(['popup','window'])
   }
- 
- 
+  const addMark = async (index) => {
+   let newIcon = [...icon]; 
+   newIcon[index] = 1
+   setIcon(newIcon)
+   await setChosedWord(data[index].id,data[index])
+  }
+  const removeMark = async (index) =>{
+   let newIcon = [...icon]; 
+   newIcon[index] = 0
+   setIcon(newIcon)
+   await delateMark(data[index].id)
+  }
+  const removeWord = async (index) => {
+    let newDelateStyle = [...delateStyle];
+    newDelateStyle[index] = 'none';
+    SetDelateStyle(newDelateStyle)
+    await delateWord(data[index].id,data[index])
+  }
   if (isNaN(Number(id))) {
     return (
       <div>Page does not exist</div>
     );
   }
+  
 
   return (
     <div className={styles.page}>
       <Popup popup={popup} setPopup = {setPopup} checked = {checked} setChecked={setChecked} />
-      <div className ={`${styles.container} ${styles.containerLabels}`}> {/* There are setting icon and category navigation*/ }
+      <div className ={`${styles.container} ${styles.containerLabels}`}>
         <div className = {styles.labels}>
        <Labels/>
         </div>
@@ -107,8 +176,8 @@ const TextBook = () => {
       <div className={styles.container}>
         <List component="div" >{
         data!==[]&&data.map((elem,index)=>{return(
-          <div key={elem.id}>
-          <ListItem component="div"> {/* There is  coloumn of list*/ }
+          <div style={{display:delateStyle[index]}}  key={elem.id}>
+          <ListItem component="div"> 
             <ListItemIcon><div className={styles.image} style={{ backgroundImage: `url(https://sashan.herokuapp.com/${elem.image})` }} /></ListItemIcon>
             <ListItemIcon><VolumeUpIcon data-name={index} onClick={(e) => { playWord(e); }} className={styles.icon} /></ListItemIcon>
             <ListItemText primary={(
@@ -118,8 +187,11 @@ const TextBook = () => {
               </div>)}
             />
             <ListItemIcon><MenuBookIcon data-name={index} onClick={(e) => { openInfo(e); }} className={styles.icon} /></ListItemIcon>
-            <ListItemIcon style={{display:checked[3]}}><DeleteIcon className={styles.icon} /></ListItemIcon>
-            <ListItemIcon style={{display:checked[3]}}><BookmarkBorderIcon className={styles.icon} /></ListItemIcon>
+            <ListItemIcon style={{display:checked[3]}}><DeleteIcon onClick={()=>{removeWord(index)}} className={styles.icon} /></ListItemIcon>
+            <ListItemIcon style={{display:checked[3]}}>
+               {icon[index]?<BookmarkIcon onClick={()=>{removeMark(index)}} className={styles.icon} />:
+               <BookmarkBorderIcon onClick={()=>{addMark(index)}} className={styles.icon} />}
+            </ListItemIcon>
           </ListItem>
           <div className={styles.info} style={{ height: display[index] }}>
             <ListItem className={styles.sentences} component="div">
