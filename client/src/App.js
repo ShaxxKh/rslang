@@ -11,6 +11,7 @@ import Learning from './pages/Learning';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import ProtectedAuthRoute from './components/ProtectedRoute/ProtectedAuthRoute';
 import TextBook from './pages/TextBook/Textbook'
+import Vocabulary from './pages/Vocabulary/Vocabulary'
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
               <ProtectedAuthRoute path="/sign-in" component={SignIn} />
               <ProtectedRoute path="/learning" component={Learning} />
               <ProtectedRoute path="/textbook/:id" component={TextBook} />
+              <ProtectedRoute path="/vocabulary" component={Vocabulary} />
               {/* <Route path="/learning" component={Learning} /> */}
             </Switch>
           </MainLayout>

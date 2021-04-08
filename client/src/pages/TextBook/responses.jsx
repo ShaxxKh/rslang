@@ -101,10 +101,10 @@ export const getWords= async() =>{
      const content = await rawResponse.json();
      return content
 }
-export const setChosedWord =async(wordId,word)=>{
-      let token = localStorage.getItem('token')
+export const setChosedWord =async(wordId,word,action)=>{
+     try{ let token = localStorage.getItem('token')
       let userId = localStorage.getItem('userID')
-     const putRespnd = await fetch(`https://sashan.herokuapp.com/users/${userId}/words/${wordId}`, {
+      const putRespnd = await fetch(`https://sashan.herokuapp.com/users/${userId}/words/${wordId}`, {
        method: 'Post',
        withCredentials: true,
        headers: {
@@ -121,7 +121,29 @@ export const setChosedWord =async(wordId,word)=>{
      });
      const PutContent = await putRespnd.json();
      console.log(PutContent)
+     return PutContent}
+     catch(e){
+      let token = localStorage.getItem('token')
+      let userId = localStorage.getItem('userID')
+      const putRespnd = await fetch(`https://sashan.herokuapp.com/users/${userId}/words/${wordId}`, {
+       method: action,
+       withCredentials: true,
+       headers: {
+         'Authorization': `Bearer ${token}`,
+         "accept": "application/json",
+         'Content-Type': 'application/json'
+       },
+       body: JSON.stringify({
+         "optional": {
+            "word": word
+         } ,
+         "difficulty": 'hard'
+       })
+     });
+     const PutContent = await putRespnd.json();
+     console.log(PutContent)
      return PutContent
+     }
 }
 export const delateMark = async(wordId)=>{
   let token = localStorage.getItem('token')
@@ -139,9 +161,10 @@ export const delateMark = async(wordId)=>{
  return PutContent
 }
 export const delateWord =async(wordId,word)=>{
+  try{
   let token = localStorage.getItem('token')
   let userId = localStorage.getItem('userID')
- const putRespnd = await fetch(`https://sashan.herokuapp.com/users/${userId}/words/${wordId}`, {
+  const putRespnd = await fetch(`https://sashan.herokuapp.com/users/${userId}/words/${wordId}`, {
    method: 'Post',
    withCredentials: true,
    headers: {
@@ -158,5 +181,20 @@ export const delateWord =async(wordId,word)=>{
  });
  const PutContent = await putRespnd.json();
  console.log(PutContent)
+ return PutContent}
+ catch(e){
+  let token = localStorage.getItem('token')
+  let userId = localStorage.getItem('userID')
+ const putRespnd = await fetch(`https://sashan.herokuapp.com/users/${userId}/words/${wordId}`, {
+   method: 'DELETE',
+   withCredentials: true,
+   headers: {
+     'Authorization': `Bearer ${token}`,
+     "accept": "application/json",
+     'Content-Type': 'application/json'
+   },
+ });
+ const PutContent = await putRespnd.json();
  return PutContent
+ }
 }
