@@ -1,4 +1,4 @@
-/* eslint-disable react/jsx-filename-extension */
+/* eslint-disable */
 import React from 'react';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -10,6 +10,8 @@ import MainContext from './context';
 import Learning from './pages/Learning';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import ProtectedAuthRoute from './components/ProtectedRoute/ProtectedAuthRoute';
+import TextBook from './pages/TextBook/Textbook'
+import Vocabulary from './pages/Vocabulary/Vocabulary'
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
               {/* <Route path="/sign-in" component={SignIn} /> */}
               <ProtectedAuthRoute path="/sign-in" component={SignIn} />
               <ProtectedRoute path="/learning" component={Learning} />
+              <ProtectedRoute path="/textbook/:id" component={TextBook} />
+              <ProtectedRoute path="/vocabulary" component={Vocabulary} />
               {/* <Route path="/learning" component={Learning} /> */}
             </Switch>
           </MainLayout>

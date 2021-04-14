@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { Context } from '../../context';
-import PropTypes from 'prop-types';
 import AuthHeader from '../Header/AuthHeader/AuthHeader';
 import MainHeader from '../Header/MainHeader/MainHeader';
 import Sidebar from '../Header/Sidebar/Sidebar';
@@ -12,9 +11,9 @@ export default function MainLayout({ children }) {
   return (
     <>
       <header>
-        { isAuth ? <MainHeader /> : <AuthHeader /> }
+        {isAuth ? <MainHeader /> : <AuthHeader />}
       </header>
-      { isAuth ? <Sidebar /> : <></> }
+      { isAuth ? <Sidebar /> : <></>}
       <main className="body">
         {children}
       </main>

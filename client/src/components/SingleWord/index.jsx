@@ -2,7 +2,7 @@ import React from 'react'
 import './SingleWord.scss'
 
 import volUp from '../../assets/icons/volume_up.svg'
-import volOff from '../../assets/icons/volume_off.svg'
+// import volOff from '../../assets/icons/volume_off.svg'
 import translate from '../../assets/icons/translate.svg'
 import close from '../../assets/icons/close.svg'
 import { Context } from '../../context'

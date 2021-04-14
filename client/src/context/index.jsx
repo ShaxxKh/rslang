@@ -57,9 +57,7 @@ export default function MainContext({ children }) {
         setCurrentValue,
         errors,
         setErrors,
-        learnWordsCount,
-        currentGroup,
-        setCurrentGroup
+        learnWordsCount
       }}
     >
       {children}

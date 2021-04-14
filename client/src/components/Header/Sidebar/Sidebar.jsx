@@ -12,70 +12,70 @@ import { ReactComponent as SettingIcon } from '../../../assets/img/sidebar/6.svg
 import './Sidebar.scss';
 
 const list = [
-    {
-        title: 'Изучение',
-        img: LearnIcon,
-        to: '/'
-    },
-    {
-        title: 'Словарь',
-        img: VocabluryIcon,
-        to: '/'
-    },
-    {
-        title: 'Мини-игры',
-        img: MiniGamesIcon,
-        to: '/'
-    },
-    {
-        title: 'Статистика',
-        img: StatisticIcon,
-        to: '/'
-    },
-    {
-        title: 'Команда',
-        img: TeamIcon,
-        to: '/'
-    },
-    {
-        title: 'Настройки',
-        img: SettingIcon,
-        to: '/'
-    },
+  {
+    title: 'Изучение',
+    img: LearnIcon,
+    to: '/'
+  },
+  {
+    title: 'Словарь',
+    img: VocabluryIcon,
+    to: '/'
+  },
+  {
+    title: 'Мини-игры',
+    img: MiniGamesIcon,
+    to: '/'
+  },
+  {
+    title: 'Статистика',
+    img: StatisticIcon,
+    to: '/'
+  },
+  {
+    title: 'Команда',
+    img: TeamIcon,
+    to: '/'
+  },
+  {
+    title: 'Настройки',
+    img: SettingIcon,
+    to: '/'
+  },
 ];
 
 const Sidebar = () => {
-    const [open, setOpen] = useState(false);
-    return (
-        <div className={open ? 'sidebar sidebar-opened' : 'sidebar'}>
-            <div className="sidebar__title">
-                <div className="sidebar__btn" onClick={() => setOpen(!open)}>
-                    <div className="burger-icon">
-                        <span className="burger-icon-line"></span>
-                    </div>
-                </div>
-                <h2>RSLang</h2>
-            </div>
-            <div className="sidebar__nav">
-                <nav className="nav">
-                    {list.map((item, idx) => {
-                        return (
-                            <Link to={item.to} className={'nav__link'} key={item.title + idx}>
-                                <item.img />
-                                <span className="nav__item-title">{item.title}</span>
-                            </Link>
-                        )
-                    })}
-                </nav>
-            </div>
-            <div className="sidebar__footer">
-                <div className="sidebar__footer logout">
-                    <LogoutIcon className="logout-icon" />
-                    <span>Выйти</span>   
-                </div>
-            </div>
+  const [open, setOpen] = useState(false);
+  return (
+    <div className={open ? 'sidebar sidebar-opened' : 'sidebar'}>
+      <div className="sidebar__title">
+        <div className="sidebar__btn" onClick={() => setOpen(!open)}>
+          <div className="burger-icon">
+            <span className="burger-icon-line"></span>
+          </div>
         </div>
-    );
+        <h2>RSLang</h2>
+      </div>
+      <div className="sidebar__nav">
+        <nav className="nav">
+          {list.map((item, idx) => {
+            return (
+              <Link to={item.to} className={'nav__link'} key={item.title + idx}>
+                <item.img />
+                <span className="nav__item-title">{item.title}</span>
+              </Link>
+            )
+          })}
+        </nav>
+      </div>
+      <div className="sidebar__footer">
+        <div className="sidebar__footer logout">
+          <LogoutIcon className="logout-icon" />
+          <span>Выйти</span>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Sidebar;
