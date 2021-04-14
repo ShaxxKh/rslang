@@ -4,6 +4,7 @@ import { Context } from '../../context';
 import AuthHeader from '../Header/AuthHeader/AuthHeader';
 import MainHeader from '../Header/MainHeader/MainHeader';
 import Sidebar from '../Header/Sidebar/Sidebar';
+import PropTypes from 'prop-types';
 
 export default function MainLayout({ children }) {
   const location = useLocation();
