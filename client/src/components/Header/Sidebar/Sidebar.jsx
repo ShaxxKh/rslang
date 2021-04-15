@@ -15,32 +15,32 @@ const list = [
   {
     title: 'Изучение',
     img: LearnIcon,
-    to: '/'
+    to: '/learning'
   },
   {
     title: 'Словарь',
     img: VocabluryIcon,
-    to: '/'
+    to: '/vocabulary'
   },
   {
     title: 'Мини-игры',
     img: MiniGamesIcon,
-    to: '/'
+    to: '/learning'
   },
   {
     title: 'Статистика',
     img: StatisticIcon,
-    to: '/'
+    to: '/learning'
   },
   {
     title: 'Команда',
     img: TeamIcon,
-    to: '/'
+    to: '/learning'
   },
   {
     title: 'Настройки',
     img: SettingIcon,
-    to: '/'
+    to: '/learning'
   },
 ];
 

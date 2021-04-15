@@ -10,7 +10,7 @@ import Popup from '../../components/Popup/Popup'
 import Labels from '../../components/Labels/Lebels'
 import { Context } from '../../context/index'
 import React from 'react'
-import {getSetting,getWords} from './responses'
+import {getSetting,getWords,setChosedWord} from './responses'
 import TextbookList from '../../components/TextbookList/TexbookList'
 
 const TextBook = (props) => {

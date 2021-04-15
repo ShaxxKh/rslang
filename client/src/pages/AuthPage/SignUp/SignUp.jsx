@@ -27,10 +27,10 @@ const SignUp = (props) => {
 				password: "" + password,
 			}
 		}).then((response) => {
-			localStorage.setItem("rslangToken", response.data.token)
+      localStorage.setItem("token", response.data.token)
+      localStorage.setItem('userID',response.data.id)
 			// document.cookie = `rslangToken=${response.data.token}; expires=${date}`
-			setAuth(true)
-			props.history.push('/learning')
+			props.history.push('/sign-in')
 		})
   });
 

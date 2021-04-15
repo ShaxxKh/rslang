@@ -51,6 +51,7 @@ const Vocabulary = ()=>{
         const fetchWord = async() =>{
             let index = active.findIndex((e)=>e==='#407df4')
             let words =await getWords()
+            console.log(words)
             let deletedWords = words.filter(e=>e.difficulty==='easy');
             let HardWords = words.filter(e=>e.difficulty==='hard');
             if(index===1){

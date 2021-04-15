@@ -20,8 +20,9 @@ const SignIn = (props) => {
 				password: "" + password
 			}
 		}).then((response) => {
-			localStorage.setItem("rslangToken", response.data.token)
-			// document.cookie = `rslangToken=${response.data.token}; expires=${date}`
+      localStorage.setItem("token", response.data.token)
+		  console.log(response)
+      localStorage.setItem('userID',response.data.userId)
 			setAuth(true)
 			props.history.push("/learning")
 		})
